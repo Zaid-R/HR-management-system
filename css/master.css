@@ -1,0 +1,99 @@
+.wrapper {
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+body {
+    height: 100vh;
+    margin: 0px;
+}
+
+main {
+    flex: 1;
+     overflow-y: scroll; 
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: royalblue;
+}
+
+.topnav a {
+    float: right;
+    color: white;
+    padding: 20px 30px ;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: "Tiempos Text Regular";
+    font-weight: 900;
+}
+
+.topnav a:hover {
+    border: 3px solid black;
+    background-color: #6f8ccb;
+    color: black;
+    border-radius: 25px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table,
+th,
+td {
+    border: 3px solid;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+th {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 10px;
+}
+
+td {
+    font-size: large;
+    font-weight: bold;
+}
+
+td img{
+    height: 60px;
+    width: 60px;
+}
+
+
+footer {
+    padding: 10px;
+    text-align: left;
+    font-size: 30px;
+    background-color: #222222;
+    color: white;
+}
+
+footer img {
+    float: right;
+    height: 60px;
+    margin-left: 15px;
+}
+
+
+.topnav .title {
+    padding-top: 14px;
+    float: left;
+    color: white;
+    font-family: 'Abril Fatface';
+    font-weight: 200;
+    font-size: xxx-large;
+}
+
+.center {
+    margin-top: 30vh;
+    display: flex;
+    height: 12vh;
+    justify-content: center;
+    align-items: center;
+}
