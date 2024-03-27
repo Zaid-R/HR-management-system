@@ -33,13 +33,13 @@ Employee.prototype.getNameAndSalary = function () {
 let tbody = document.getElementsByTagName("tbody");
 
 let employees = [
-    new Employee(1000, "Ghazi Samer", "Administration", "Senior", "../images/default personal image.jpg"),
-    new Employee(1001, "Lana Ali", "Finance", "Senior", "../images/default personal image.jpg"),
-    new Employee(1002, "Tamara Ayoub", "Marketing", "Senior", "../images/default personal image.jpg"),
-    new Employee(1003, "Safi Walid", "Administration", "Mid-Senior", "../images/default personal image.jpg"),
-    new Employee(1004, "Omar Zaid", "Development", "Senior", "../images/default personal image.jpg"),
-    new Employee(1005, "Rana Saleh", "Development", "Junior", "../images/default personal image.jpg"),
-    new Employee(1006, "Hadi Ahmad", "Finance", "Mid-Senior", "../images/default personal image.jpg"),
+    new Employee(1000, "Ghazi Samer", "Administration", "Senior", "images/default personal image.jpg"),
+    new Employee(1001, "Lana Ali", "Finance", "Senior", "images/default personal image.jpg"),
+    new Employee(1002, "Tamara Ayoub", "Marketing", "Senior", "images/default personal image.jpg"),
+    new Employee(1003, "Safi Walid", "Administration", "Mid-Senior", "images/default personal image.jpg"),
+    new Employee(1004, "Omar Zaid", "Development", "Senior", "images/default personal image.jpg"),
+    new Employee(1005, "Rana Saleh", "Development", "Junior", "images/default personal image.jpg"),
+    new Employee(1006, "Hadi Ahmad", "Finance", "Mid-Senior", "images/default personal image.jpg"),
 ];
 
 for (let i = 0; i < employees.length; i++) {
