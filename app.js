@@ -31,15 +31,15 @@ Employee.prototype.getNameAndSalary = function () {
 
 
 let tbody = document.getElementsByTagName("tbody");
-
+let imageUrl = "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?w=740&t=st=1711538419~exp=1711539019~hmac=3b47d39464306ec37f9a38fc0693dc6f0484a71482c382764b7030d495d5c0ce";
 let employees = [
-    new Employee(1000, "Ghazi Samer", "Administration", "Senior", "images/default personal image.jpg"),
-    new Employee(1001, "Lana Ali", "Finance", "Senior", "images/default personal image.jpg"),
-    new Employee(1002, "Tamara Ayoub", "Marketing", "Senior", "images/default personal image.jpg"),
-    new Employee(1003, "Safi Walid", "Administration", "Mid-Senior", "images/default personal image.jpg"),
-    new Employee(1004, "Omar Zaid", "Development", "Senior", "images/default personal image.jpg"),
-    new Employee(1005, "Rana Saleh", "Development", "Junior", "images/default personal image.jpg"),
-    new Employee(1006, "Hadi Ahmad", "Finance", "Mid-Senior", "images/default personal image.jpg"),
+    new Employee(1000, "Ghazi Samer", "Administration", "Senior", imageUrl),
+    new Employee(1001, "Lana Ali", "Finance", "Senior", imageUrl),
+    new Employee(1002, "Tamara Ayoub", "Marketing", "Senior", imageUrl),
+    new Employee(1003, "Safi Walid", "Administration", "Mid-Senior", imageUrl),
+    new Employee(1004, "Omar Zaid", "Development", "Senior", imageUrl),
+    new Employee(1005, "Rana Saleh", "Development", "Junior", imageUrl),
+    new Employee(1006, "Hadi Ahmad", "Finance", "Mid-Senior", imageUrl),
 ];
 
 for (let i = 0; i < employees.length; i++) {
