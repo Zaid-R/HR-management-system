@@ -6,13 +6,12 @@
 }
 
 body {
-    height: 100vh;
+    height: 120vh;
     margin: 0px;
 }
 
 main {
     flex: 1;
-     overflow-y: scroll; 
 }
 
 .topnav {
@@ -38,6 +37,7 @@ main {
 }
 
 table {
+    float: center;
     border-collapse: collapse;
 }
 
@@ -93,7 +93,7 @@ footer img {
 .center {
     margin-top: 30vh;
     display: flex;
-    height: 12vh;
+    height: 30vh;
     justify-content: center;
     align-items: center;
 }
