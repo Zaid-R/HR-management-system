@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <!-- Header for navigating to any other pages. -->
+
     <div class="wrapper">
         <header>
             <div class="topnav">
@@ -20,28 +20,37 @@
             </div>
         </header>
 
-        <!-- Main will be empty for today's lab. -->
         <main>
+            <section class = "section-form">
+                <form>
+                    <label for="fullName">Full Name</label>
+                    <input type="text" name="fullName" placeholder="Full name" />
+
+                    <label for="imageUrl">Image Url</label>
+                    <input type="text" name="imageUrl" placeholder="Image url">
+
+                    <select id="department">
+                        <option value="Department">Department</option>
+                        <option value="Administration">Administration</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Development">Development</option>
+                        <option value="Finance">Finance</option>
+                    </select>
+                    <select id="level">
+                        <option value="Level">Level</option>
+                        <option value="Junior">Junior</option>
+                        <option value="Mid-Senior">Mid-Senior</option>
+                        <option value="Senior">Senior</option>
+                    </select>
+                    <input type="submit" name="Submit" style="margin-top:15px">
+                </form>
+            </section>
+
             <div class="center">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Employee ID</th>
-                            <th>Full Name</th>
-                            <th>Department</th>
-                            <th>Level</th>
-                            <th>Image </th>
-                            <th>Net Salary</th>
-                            <th>Salary</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+
             </div>
         </main>
 
-        <!-- Footer will have some social media links with copyright. -->
         <footer>
             &copy; Copyright 2024
             <a href="https://instagram.com">
