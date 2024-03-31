@@ -4,12 +4,11 @@ let employees = [];
 
 
 class Employee {
-    constructor(fullName, department, level, imageUrl) {
+    constructor(fullName, department, level) {
         this.id = generateUniqueId();
         this.fullName = fullName;
         this.department = department;
         this.level = level;
-        this.imageUrl = imageUrl;
         this.salary = this.level == "Junior" ?
             generateRandomSalary(500, 1000) : this.level == "Mid-Senior" ?
                 generateRandomSalary(1000, 1500) :
@@ -17,6 +16,10 @@ class Employee {
                     generateRandomSalary(1500, 2000) : undefined;
         employees.push(this);
     };
+
+    setImageUrl(url) {
+        this.imageUrl = url;    
+    }
 }
 
 function generateRandomSalary(min, max) {
@@ -41,17 +44,15 @@ Employee.prototype.getNameAndSalary = function () {
 }
 
 
-let imageUrl = "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?w=740&t=st=1711538419~exp=1711539019~hmac=3b47d39464306ec37f9a38fc0693dc6f0484a71482c382764b7030d495d5c0ce";
-
 let departments = ["Administration", "Development", "Finance", "Marketing"];
 
-new Employee("Ghazi Samer", "Administration", "Senior", imageUrl);
-new Employee("Lana Ali", "Finance", "Senior", imageUrl);
-new Employee("Tamara Ayoub", "Marketing", "Senior", imageUrl);
-new Employee("Safi Walid", "Administration", "Mid-Senior", imageUrl);
-new Employee("Omar Zaid", "Development", "Senior", imageUrl);
-new Employee("Rana Saleh", "Development", "Junior", imageUrl);
-new Employee("Hadi Ahmad", "Finance", "Mid-Senior", imageUrl);
+new Employee("Ghazi Samer", "Administration", "Senior");
+new Employee("Lana Ali", "Finance", "Senior");
+new Employee("Tamara Ayoub", "Marketing", "Senior");
+new Employee("Safi Walid", "Administration", "Mid-Senior");
+new Employee("Omar Zaid", "Development", "Senior");
+new Employee("Rana Saleh", "Development", "Junior");
+new Employee("Hadi Ahmad", "Finance", "Mid-Senior");
 
 
 let center = document.getElementsByClassName("center")[0];
@@ -64,26 +65,37 @@ departments.forEach(department => {
     // Create a section for the department
     let departmentSection = document.createElement("section");
     departmentSection.classList.add("emps");
-
+    // Create fieldset
+    let departmentFieldset = document.createElement("fieldset");
+    //Create legend 
+    let departmentLegend = document.createElement("legend");
     // Add department name as heading
     let departmentHeading = document.createElement("h2");
     departmentHeading.textContent = department;
-    departmentSection.appendChild(departmentHeading);
+    departmentLegend.appendChild(departmentHeading);
+    departmentFieldset.appendChild(departmentLegend);
+    departmentSection.appendChild(departmentFieldset);
 
     // Append employee cards to the section
     departmentEmployees.forEach(employee => {
         let firstName = employee.fullName.split(" ")[0];
         let cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
+        let imageUrl = `assets/${firstName}.jpg`;
+        employee.setImageUrl(imageUrl);
         cardDiv.innerHTML = `
-            <img src="assets/${firstName}.jpg">
-            <div class="card-content">
-                <p>Name: ${employee.fullName} - ID: ${employee.id}</p>
-                <p>Department: ${employee.department} - Level: ${employee.level}</p>
+        <div class="container">
+         <div class="wrapper">
+            <img src="${employee.imageUrl}" alt="">
+            <div class="title">
+               <p>Name: ${employee.fullName}</p><p> ID: ${employee.id}</p>
+               <p>Department: ${employee.department}</p><p> Level: ${employee.level}</p>
                 <p>${employee.salary}</p>
             </div>
+         </div>
+      </div>
         `;
-        departmentSection.appendChild(cardDiv);
+        departmentFieldset.appendChild(cardDiv);
     });
 
     // Append the department section to the center container
