@@ -57,16 +57,35 @@ new Employee("Hadi Ahmad", "Finance", "Mid-Senior");
 
 let center = document.getElementsByClassName("center")[0];
 
+function addCard(employee){
+    let fieldset = document.getElementsByClassName(employee.department)[0];
+    let card = document.createElement("div");
+    card.innerHTML = 
+    `
+    <div class="container">
+         <div class="wrapper">
+            <img src="${employee.imageUrl}" alt="${employee.fullName}">
+            <div class="title">
+               <p>Name: ${employee.fullName}</p><p> ID: ${employee.id}</p>
+               <p>Department: ${employee.department}</p><p> Level: ${employee.level}</p>
+                <p>${employee.salary}</p>
+            </div>
+         </div>
+      </div>
+    `;
+    fieldset.appendChild(card);
+}
+
 //verticaly correct
 departments.forEach(department => {
     // Filter employees by department
     let departmentEmployees = employees.filter(employee => employee.department === department);
-    console.log(departmentEmployees);
     // Create a section for the department
     let departmentSection = document.createElement("section");
     departmentSection.classList.add("emps");
     // Create fieldset
     let departmentFieldset = document.createElement("fieldset");
+    departmentFieldset.classList.add(department);
     //Create legend 
     let departmentLegend = document.createElement("legend");
     // Add department name as heading
@@ -86,7 +105,7 @@ departments.forEach(department => {
         cardDiv.innerHTML = `
         <div class="container">
          <div class="wrapper">
-            <img src="${employee.imageUrl}" alt="">
+            <img src="${employee.imageUrl}" alt="${employee.fullName}">
             <div class="title">
                <p>Name: ${employee.fullName}</p><p> ID: ${employee.id}</p>
                <p>Department: ${employee.department}</p><p> Level: ${employee.level}</p>
@@ -106,14 +125,19 @@ departments.forEach(department => {
 let myForm = document.forms[0];
 
 myForm.addEventListener("submit", function (e) {
+     e.preventDefault();
     let fullName = e.target.fullName.value;
     let imageUrl = e.target.imageUrl.value;
     let department = e.target.department.value;
     let level = e.target.level.value;
     if (fullName.isEmpty() || imageUrl.isEmpty() || department == "Department" || level == "Level") {
-        e.preventDefault();
+        return;
     } else {
-        new Employee(fullName, department, level, imageUrl);
+        let newEmp = new Employee(fullName, department, level);
+        newEmp.setImageUrl(imageUrl);
+        addCard(newEmp);
         console.log("Emp added");
+        console.log(...employees);
+       
     }
 });
