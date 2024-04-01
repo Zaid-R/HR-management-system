@@ -60,6 +60,7 @@ let center = document.getElementsByClassName("center")[0];
 function addCard(employee){
     let fieldset = document.getElementsByClassName(employee.department)[0];
     let card = document.createElement("div");
+    card.classList.add("card");
     card.innerHTML = 
     `
     <div class="container">
