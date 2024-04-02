@@ -57,8 +57,7 @@ new Employee("Hadi Ahmad", "Finance", "Mid-Senior");
 
 let center = document.getElementsByClassName("center")[0];
 
-function addCard(employee){
-    let fieldset = document.getElementsByClassName(employee.department)[0];
+function createCard(employee){
     let card = document.createElement("div");
     card.classList.add("card");
     card.innerHTML = 
@@ -74,6 +73,12 @@ function addCard(employee){
          </div>
       </div>
     `;
+    return card;
+}
+
+function addCard(employee){
+    let fieldset = document.getElementsByClassName(employee.department)[0];
+    let card = createCard(employee);
     fieldset.appendChild(card);
 }
 
@@ -99,23 +104,10 @@ departments.forEach(department => {
     // Append employee cards to the section
     departmentEmployees.forEach(employee => {
         let firstName = employee.fullName.split(" ")[0];
-        let cardDiv = document.createElement("div");
-        cardDiv.classList.add("card");
         let imageUrl = `assets/${firstName}.jpg`;
         employee.setImageUrl(imageUrl);
-        cardDiv.innerHTML = `
-        <div class="container">
-         <div class="wrapper">
-            <img src="${employee.imageUrl}" alt="${employee.fullName}">
-            <div class="title">
-               <p>Name: ${employee.fullName}</p><p> ID: ${employee.id}</p>
-               <p>Department: ${employee.department}</p><p> Level: ${employee.level}</p>
-                <p>${employee.salary}</p>
-            </div>
-         </div>
-      </div>
-        `;
-        departmentFieldset.appendChild(cardDiv);
+        let card = createCard(employee);
+        departmentFieldset.appendChild(card);
     });
 
     // Append the department section to the center container
@@ -137,8 +129,5 @@ myForm.addEventListener("submit", function (e) {
         let newEmp = new Employee(fullName, department, level);
         newEmp.setImageUrl(imageUrl);
         addCard(newEmp);
-        console.log("Emp added");
-        console.log(...employees);
-       
     }
 });
