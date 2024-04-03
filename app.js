@@ -1,7 +1,8 @@
+'use strict';
 //======================= Lab 8 =======================
 
 let employees = [];
-
+let dataKey = "employees";
 
 class Employee {
     constructor(fullName, department, level) {
@@ -76,6 +77,19 @@ function createCard(employee){
     return card;
 }
 
+function addEmployeeToLocalstorage(employee){
+    if(localStorage.getItem(dataKey)==null){
+        localStorage.setItem(dataKey,JSON.stringify([]));
+    }
+
+    let employees = JSON.parse(localStorage.getItem(dataKey));
+
+    if(!employees.map(emp => emp.id).includes(employee.id)){
+        employees.push(employee);
+        localStorage.setItem(dataKey,JSON.stringify(employees));
+    }
+}
+
 function addCard(employee){
     let fieldset = document.getElementsByClassName(employee.department)[0];
     let card = createCard(employee);
@@ -106,6 +120,9 @@ departments.forEach(department => {
         let firstName = employee.fullName.split(" ")[0];
         let imageUrl = `assets/${firstName}.jpg`;
         employee.setImageUrl(imageUrl);
+
+        addEmployeeToLocalstorage(employee);
+
         let card = createCard(employee);
         departmentFieldset.appendChild(card);
     });
@@ -129,5 +146,6 @@ myForm.addEventListener("submit", function (e) {
         let newEmp = new Employee(fullName, department, level);
         newEmp.setImageUrl(imageUrl);
         addCard(newEmp);
+        addEmployeeToLocalstorage(newEmp);
     }
 });
