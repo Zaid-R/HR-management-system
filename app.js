@@ -9,6 +9,7 @@ class Employee {
         this.id = generateUniqueId();
         this.fullName = fullName;
         this.department = department;
+        this.imageUrl =`assets/${this.fullName.split(" ")[0]}.jpg`;
         this.level = level;
         this.salary = this.level == "Junior" ?
             generateRandomSalary(500, 1000) : this.level == "Mid-Senior" ?
@@ -17,9 +18,9 @@ class Employee {
                     generateRandomSalary(1500, 2000) : undefined;
         employees.push(this);
     };
-
-    setImageUrl(url) {
-        this.imageUrl = url;    
+    
+    setImageUrl(url){
+        this.imageUrl = url;
     }
 }
 
@@ -82,7 +83,7 @@ function addEmployeeToLocalstorage(employee){
         localStorage.setItem(dataKey,JSON.stringify([]));
     }
 
-    let employees = JSON.parse(localStorage.getItem(dataKey));
+    employees = JSON.parse(localStorage.getItem(dataKey));
 
     if(!employees.map(emp => emp.id).includes(employee.id)){
         employees.push(employee);
@@ -117,10 +118,6 @@ departments.forEach(department => {
 
     // Append employee cards to the section
     departmentEmployees.forEach(employee => {
-        let firstName = employee.fullName.split(" ")[0];
-        let imageUrl = `assets/${firstName}.jpg`;
-        employee.setImageUrl(imageUrl);
-
         addEmployeeToLocalstorage(employee);
 
         let card = createCard(employee);
