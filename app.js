@@ -9,7 +9,7 @@ class Employee {
         this.id = generateUniqueId();
         this.fullName = fullName;
         this.department = department;
-        this.imageUrl =`assets/${this.fullName.split(" ")[0]}.jpg`;
+        this.imageUrl = `assets/${this.fullName.split(" ")[0]}.jpg`;
         this.level = level;
         this.salary = this.level == "Junior" ?
             generateRandomSalary(500, 1000) : this.level == "Mid-Senior" ?
@@ -18,8 +18,8 @@ class Employee {
                     generateRandomSalary(1500, 2000) : undefined;
         employees.push(this);
     };
-    
-    setImageUrl(url){
+
+    setImageUrl(url) {
         this.imageUrl = url;
     }
 }
@@ -56,14 +56,24 @@ new Employee("Omar Zaid", "Development", "Senior");
 new Employee("Rana Saleh", "Development", "Junior");
 new Employee("Hadi Ahmad", "Finance", "Mid-Senior");
 
+function addEmployeesToLocalStorage(){
+    localStorage.setItem(dataKey, JSON.stringify(employees));
+}
+
+function addHardCodedDataToLocalStorage() {
+    let dataOnLocalStorage = localStorage.getItem(dataKey);
+    if (dataOnLocalStorage == null) {
+        addEmployeesToLocalStorage();
+    }
+}
 
 let center = document.getElementsByClassName("center")[0];
 
-function createCard(employee){
+function createCard(employee) {
     let card = document.createElement("div");
     card.classList.add("card");
-    card.innerHTML = 
-    `
+    card.innerHTML =
+        `
     <div class="container">
          <div class="wrapper">
             <img src="${employee.imageUrl}" alt="${employee.fullName}">
@@ -78,61 +88,52 @@ function createCard(employee){
     return card;
 }
 
-function addEmployeeToLocalstorage(employee){
-    if(localStorage.getItem(dataKey)==null){
-        localStorage.setItem(dataKey,JSON.stringify([]));
-    }
 
-    employees = JSON.parse(localStorage.getItem(dataKey));
-
-    if(!employees.map(emp => emp.id).includes(employee.id)){
-        employees.push(employee);
-        localStorage.setItem(dataKey,JSON.stringify(employees));
-    }
-}
-
-function addCard(employee){
+function addCard(employee) {
     let fieldset = document.getElementsByClassName(employee.department)[0];
     let card = createCard(employee);
     fieldset.appendChild(card);
 }
 
-//verticaly correct
-departments.forEach(department => {
-    // Filter employees by department
-    let departmentEmployees = employees.filter(employee => employee.department === department);
-    // Create a section for the department
-    let departmentSection = document.createElement("section");
-    departmentSection.classList.add("emps");
-    // Create fieldset
-    let departmentFieldset = document.createElement("fieldset");
-    departmentFieldset.classList.add(department);
-    //Create legend 
-    let departmentLegend = document.createElement("legend");
-    // Add department name as heading
-    let departmentHeading = document.createElement("h2");
-    departmentHeading.textContent = department;
-    departmentLegend.appendChild(departmentHeading);
-    departmentFieldset.appendChild(departmentLegend);
-    departmentSection.appendChild(departmentFieldset);
+function renderData() {
+    //First of all, get data from local storage
+    employees = JSON.parse(localStorage.getItem(dataKey));
 
-    // Append employee cards to the section
-    departmentEmployees.forEach(employee => {
-        addEmployeeToLocalstorage(employee);
+    //then show the data on the page
+    departments.forEach(department => {
+        // Filter employees by department
+        let departmentEmployees = employees.filter(employee => employee.department === department);
+        // Create a section for the department
+        let departmentSection = document.createElement("section");
+        departmentSection.classList.add("emps");
+        // Create fieldset
+        let departmentFieldset = document.createElement("fieldset");
+        departmentFieldset.classList.add(department);
+        //Create legend 
+        let departmentLegend = document.createElement("legend");
+        // Add department name as heading
+        let departmentHeading = document.createElement("h2");
+        departmentHeading.textContent = department;
+        departmentLegend.appendChild(departmentHeading);
+        departmentFieldset.appendChild(departmentLegend);
+        departmentSection.appendChild(departmentFieldset);
 
-        let card = createCard(employee);
-        departmentFieldset.appendChild(card);
+        // Append employee cards to the section
+        departmentEmployees.forEach(employee => {
+            let card = createCard(employee);
+            departmentFieldset.appendChild(card);
+        });
+        // addEmployeeToLocalstorage(employee);
+        // Append the department section to the center container
+        center.appendChild(departmentSection);
     });
-
-    // Append the department section to the center container
-    center.appendChild(departmentSection);
-});
+}
 
 
 let myForm = document.forms[0];
 
 myForm.addEventListener("submit", function (e) {
-     e.preventDefault();
+    e.preventDefault();
     let fullName = e.target.fullName.value;
     let imageUrl = e.target.imageUrl.value;
     let department = e.target.department.value;
@@ -142,7 +143,11 @@ myForm.addEventListener("submit", function (e) {
     } else {
         let newEmp = new Employee(fullName, department, level);
         newEmp.setImageUrl(imageUrl);
+        addEmployeesToLocalStorage();
         addCard(newEmp);
-        addEmployeeToLocalstorage(newEmp);
     }
 });
+
+addHardCodedDataToLocalStorage();
+
+renderData();
